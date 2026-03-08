@@ -1,0 +1,227 @@
+/* ================ DASHBOARD STYLES ================ */
+.dashboard {
+    width: 950px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.25);
+    animation: fadeIn 0.4s ease-in-out;
+    font-family: Cambria, Cochin;
+    font-weight: bold;
+    margin: 20px auto;
+    
+}
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.welcome-box h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff3399, #8e2de2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#welcomeText {}
+
+p {
+    margin: 2px 0 0 0;
+}
+
+.logout-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4e50, #f00000);
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.logout-icon:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+/* INPUTS */
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    margin: 6px 0;
+    border-radius: 10px;
+    border: 1px solid #ffcce6;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #ff3399;
+    box-shadow: 0 0 8px rgba(255, 51, 153, 0.3);
+    outline: none;
+}
+
+/* BUTTONS */
+button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px 3px;
+    color: white;
+    font-size: 13px;
+}
+
+/* TREASURER BUTTONS */
+button:not(.logout):not(.delete-btn):not(.edit-btn):not(.search-btn):not(.show-btn) {
+    background: linear-gradient(135deg, #ff3399, #ff66b2);
+}
+
+button:not(.logout):not(.delete-btn):not(.edit-btn):not(.search-btn):not(.show-btn):hover {
+    background: linear-gradient(135deg, #e60073, #ff3399);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 0, 128, 0.3);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #36d1dc, #5b86e5);
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #2b9ed4, #3a5bdc);
+    transform: scale(1.05);
+}
+
+.show-btn {
+    background: linear-gradient(135deg, #ff9ecf, #ff66b2);
+}
+
+.show-btn:hover {
+    background: linear-gradient(135deg, #ff66b2, #ff3399);
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #8e2de2, #c471ed);
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #6a11cb, #9f44d3);
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ff4e50, #f00000);
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #d10000, #a80000);
+    transform: scale(1.05);
+}
+
+.logout {
+    background: #ff1a75;
+}
+
+.logout:hover {
+    background: #cc0052;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(135deg, #ff3399, #ff66b2);
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ffe6f2;
+}
+
+tbody tr:hover {
+    background: #fff0f8;
+}
+
+/* ERROR & HR */
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #ffd6ec;
+    margin: 20px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    .dashboard {
+        width: 95%;
+    }
+
+    table {
+        font-size: 11px;
+    }
+}
+.history-section {
+    margin-top: 20px;
+}
+
+.history-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 13px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.history-section th {
+    background: linear-gradient(135deg, #36d1dc, #5b86e5); /* nice distinct color */
+    color: white;
+    padding: 10px;
+}
+
+.history-section td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #d0f0f5;
+}
+
+.history-section tbody tr:hover {
+    background: #e0f7fa;
+}

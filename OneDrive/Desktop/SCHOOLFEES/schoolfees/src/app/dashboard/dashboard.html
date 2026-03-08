@@ -1,0 +1,125 @@
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="welcome-box">
+      <h2>{{welcome}}</h2>
+      <p>{{roleText}}</p>
+    </div>
+    <button class="logout-icon" (click)="logout()">⎋</button>
+  </div>
+
+  <!-- TREASURER PAYMENT FORM -->
+  <div *ngIf="isTreasurer">
+    <hr>
+    <h3>Student Payment Entry Form</h3>
+
+    <input type="text" [(ngModel)]="studentId" placeholder="Student ID">
+    <input type="text" [(ngModel)]="studentName" placeholder="Student Name">
+    <input type="text" [(ngModel)]="course" placeholder="Course">
+    <input type="text" [(ngModel)]="yearLevel" placeholder="Year Level">
+
+    <input type="text" [(ngModel)]="feeName" placeholder="Fee Name">
+    <input type="number" [(ngModel)]="feeAmount" placeholder="Fee Amount">
+    <input type="text" [(ngModel)]="description" placeholder="Fee Description">
+
+    <select [(ngModel)]="paymentMethod">
+      <option value="">Select Payment Method</option>
+      <option value="Cash">Cash</option>
+      <option value="GCash">GCash</option>
+    </select>
+
+    <input type="number" [(ngModel)]="amountPaid" placeholder="Amount Paid">
+
+    <select [(ngModel)]="paymentStatus">
+      <option value="Paid">Paid</option>
+      <option value="Partial">Partial</option>
+    </select>
+
+    <input type="date" [(ngModel)]="paymentDate">
+
+    <button (click)="saveRecord()">Submit Record</button>
+  </div>
+
+  <hr>
+
+  <!-- SEARCH -->
+  <h3>Search Student Record</h3>
+  <input type="text" [(ngModel)]="searchId" placeholder="Enter Student ID">
+  <button (click)="searchRecord()">Search</button>
+  <button (click)="displayRecords()">Show All</button>
+
+  <hr>
+
+  <!-- MAIN RECORDS TABLE -->
+  <h3>Payment Records</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Year</th>
+        <th>Fee</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Method</th>
+        <th>Paid</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of records; let i = index">
+        <td>{{r.studentId}}</td>
+        <td>{{r.name}}</td>
+        <td>{{r.course}}</td>
+        <td>{{r.year}}</td>
+        <td>{{r.fee}}</td>
+        <td>{{r.feeAmt}}</td>
+        <td>{{r.desc}}</td>
+        <td>{{r.method}}</td>
+        <td>{{r.paid}}</td>
+        <td>{{r.status}}</td>
+        <td>{{r.date}}</td>
+        <td>
+          <button *ngIf="isAdmin" class="delete-btn" (click)="deleteRecord(i)">Delete</button>
+          <button *ngIf="isTreasurer" class="edit-btn" (click)="editRecord(i)">Edit</button>
+          <button class="show-btn" (click)="viewHistory(r.studentId)">View History</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- HISTORY SECTION -->
+  <div *ngIf="historyRecords.length > 0" class="history-section">
+    <hr>
+    <h3>History for Student ID: {{currentHistoryStudentId}}</h3>
+    <button class="logout" (click)="closeHistory()">Close History</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Fee</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Method</th>
+          <th>Paid</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of historyRecords">
+          <td>{{h.fee}}</td>
+          <td>₱{{h.feeAmt}}</td>
+          <td>{{h.desc}}</td>
+          <td>{{h.method}}</td>
+          <td>₱{{h.paid}}</td>
+          <td>{{h.status}}</td>
+          <td>{{h.date}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

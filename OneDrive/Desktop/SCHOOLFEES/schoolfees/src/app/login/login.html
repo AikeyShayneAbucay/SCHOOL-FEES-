@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>School Fees Management System</h2>
+
+  <!-- LOGIN -->
+  <div *ngIf="showLoginSection">
+    <h3>Login</h3>
+    <input type="text" [(ngModel)]="loginUsername" name="loginUsername" placeholder="Username" />
+    <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="Password" />
+
+    <button (click)="login()">Login</button>
+
+    <p>No account? <a (click)="showRegister()">Register here</a></p>
+
+    <p class="error">{{ loginError }}</p>
+  </div>
+
+  <!-- REGISTER -->
+  <div *ngIf="!showLoginSection">
+    <h3>Register Account</h3>
+    <form (submit)="register(); $event.preventDefault()">
+      <input type="text" [(ngModel)]="regFirstName" name="fname" placeholder="First Name" />
+      <input type="text" [(ngModel)]="regLastName" name="lname" placeholder="Last Name" />
+      <input type="email" [(ngModel)]="regEmail" name="email" placeholder="Email" />
+      <input type="text" [(ngModel)]="regContact" name="contact" placeholder="Contact Number" />
+      <input type="text" [(ngModel)]="regAddress" name="address" placeholder="Address" />
+
+      <label>Date of Birth:</label>
+      <input type="date" [(ngModel)]="regBirthDate" name="birth" (change)="computeAge()" />
+      <input type="number" [(ngModel)]="regAge" name="age" placeholder="Age (Auto Computed)" readonly />
+
+      <select [(ngModel)]="regGender" name="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <hr />
+
+      <input type="text" [(ngModel)]="regUsername" name="username" placeholder="Username" />
+      <input type="password" [(ngModel)]="regPassword" name="password" placeholder="Password" />
+
+      <select [(ngModel)]="regRole" name="role">
+        <option value="admin">Admin</option>
+        <option value="treasurer">Treasurer</option>
+      </select>
+
+     <button type="button" (click)="register()">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="#" (click)="showLogin()">Back to Login</a></p>
+
+    <!-- SUCCESS / ERROR MESSAGES -->
+    <div *ngIf="registerMessage" class="message">
+      <span>{{ registerMessage }}</span>
+      <!-- Show "Go to Login" button only for success message -->
+      <button *ngIf="registerMessage === 'Registration successful!'" (click)="showLogin()">
+        Go to Login
+      </button>
+    </div>
+  </div>
+</div>

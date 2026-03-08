@@ -1,0 +1,123 @@
+/* ================ LOGIN STYLES ================ */
+.container {
+    width: 400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.25);
+    animation: fadeIn 0.4s ease-in-out;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9ecf, #ff66b2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #c2185b;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    margin: 6px 0;
+    border-radius: 10px;
+    border: 1px solid #ffcce6;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #ff3399;
+    box-shadow: 0 0 8px rgba(255, 51, 153, 0.3);
+    outline: none;
+}
+
+button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px 3px;
+    color: white;
+    font-size: 13px;
+    background: linear-gradient(135deg, #ff3399, #ff66b2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #e60073, #ff3399);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 0, 128, 0.3);
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+a {
+    color: #d63384;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #ffd6ec;
+    margin: 20px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 450px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+    input, select {
+        font-size: 12px;
+        padding: 9px;
+    }
+    button {
+        font-size: 12px;
+        padding: 7px 12px;
+    }
+}
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 2px;
+}
