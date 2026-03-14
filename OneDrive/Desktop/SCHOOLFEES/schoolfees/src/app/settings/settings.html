@@ -1,0 +1,47 @@
+<div class="settings-container">
+
+  <!-- Top bar -->
+  <div class="settings-header">
+    <h2>Account Settings</h2>
+    <div class="actions">
+      <button title="Logout" (click)="logout()">
+        <img src="logout.png" alt="Logout" width="20" height="20">
+      </button>
+      <button (click)="switchAccount()">Switch Account</button>
+      <button (click)="switchMode()">
+        {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Account information card -->
+  <div class="account-info" *ngIf="user">
+    <h3>Account Information</h3>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Contact:</strong> {{ user.contact }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <p><strong>Birth Date:</strong> {{ user.dob }}</p>
+    <p><strong>Age:</strong> {{ user.age }}</p>
+    <p><strong>Gender:</strong> {{ user.gender }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+  </div>
+
+  <!-- Change password card -->
+  <div class="change-password">
+    <h3>Change Password</h3>
+    <input type="password" placeholder="Current Password" [(ngModel)]="currentPassword">
+    <input type="password" placeholder="New Password" [(ngModel)]="newPassword">
+    <input type="password" placeholder="Confirm New Password" [(ngModel)]="confirmPassword">
+    <button (click)="changePassword()">Change Password</button>
+    <p class="message">{{ passwordMessage }}</p>
+  </div>
+
+  <!-- Add profile card -->
+  <div class="add-profile">
+    <button (click)="addProfile()">Add Profile</button>
+  </div>
+
+</div>

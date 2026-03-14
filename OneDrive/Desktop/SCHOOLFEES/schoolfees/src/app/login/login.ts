@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
-export class LoginComponent {
-
+export class Login {
   constructor(private router: Router) {}
 
   showLoginSection = true;
@@ -33,7 +32,6 @@ export class LoginComponent {
   regUsername = '';
   regPassword = '';
   regRole = 'admin';
-
   registerMessage = '';
 
   // Toggle sections
@@ -47,7 +45,6 @@ export class LoginComponent {
     this.registerMessage = '';
   }
 
-  // Compute age
   computeAge() {
     if (!this.regBirthDate) return;
     const today = new Date();
@@ -58,7 +55,6 @@ export class LoginComponent {
     this.regAge = age;
   }
 
-  // Register
   register() {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
 
@@ -67,11 +63,10 @@ export class LoginComponent {
       return;
     }
 
-    // Password validation: min 6 chars, 1 uppercase, 1 number
     const pattern = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
     if (!pattern.test(this.regPassword)) {
       this.registerMessage =
-        'Password must be at least 6 characters, include 1 uppercase letter and 1 number!';
+        'Invalid password. It must contain at least 6 characters, one uppercase letter, and one number';
       return;
     }
 
@@ -97,22 +92,24 @@ export class LoginComponent {
 
     localStorage.setItem('users', JSON.stringify(users));
     this.registerMessage = 'Registration successful!';
-    
   }
 
-  // Login
   login() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(
-      (u: any) => u.username === this.loginUsername && u.password === this.loginPassword
-    );
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  const user = users.find(
+    (u: any) => u.username === this.loginUsername && u.password === this.loginPassword
+  );
 
-    if (!user) {
-      this.loginError = 'Invalid username or password!';
-      return;
-    }
+  if (!user) {
+    this.loginError = 'Invalid username or password!';
+    return;
+  }
 
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    this.router.navigate(['/dashboard']);
+  // Save logged-in user
+  localStorage.setItem('currentUser', JSON.stringify(user));
+
+  // Navigate to home page after login
+  this.router.navigate(['/home']);
+
   }
 }

@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Login } from './login';  // now it works
 
-describe('Login', () => {
-  let component: Login;
-  let fixture: ComponentFixture<Login>;
+import { Records } from './records';
+
+describe('Records', () => {
+  let component: Records;
+  let fixture: ComponentFixture<Records>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Login ]
+      imports: [Records],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Login);
+    fixture = TestBed.createComponent(Records);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {

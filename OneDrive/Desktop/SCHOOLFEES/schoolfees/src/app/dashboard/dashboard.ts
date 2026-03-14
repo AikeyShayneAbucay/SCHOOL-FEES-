@@ -15,6 +15,7 @@ export class DashboardComponent {
   roleText = '';
   isTreasurer = false;
   isAdmin = false;
+  
 
   studentId = '';
   studentName = '';

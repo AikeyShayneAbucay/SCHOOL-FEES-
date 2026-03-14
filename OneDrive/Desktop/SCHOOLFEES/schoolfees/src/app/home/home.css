@@ -1,0 +1,25 @@
+.cards{
+display:flex;
+justify-content:space-around;
+margin-top:40px;
+gap:20px;
+}
+
+.card{
+background: #d6809a;
+padding:25px;
+border-radius:10px;
+width:250px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card h3{
+color:#c2185b;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:22px;
+font-weight:bold;
+}

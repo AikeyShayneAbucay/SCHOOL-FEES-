@@ -1,0 +1,64 @@
+<div class="container">
+
+  <h1 class="title">PAYMENT RECORDS</h1>
+
+  <div class="top-bar">
+
+    <button class="add-btn">ADD STUDENT PAYMENT FORM</button>
+
+    <div class="search-box">
+      <input type="text" placeholder="SEARCH STUDENT ID" [(ngModel)]="searchId">
+      <button (click)="searchStudent()">SEARCH</button>
+    </div>
+
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Year</th>
+        <th>Fee</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Payment Method</th>
+        <th>Bal Amount</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let record of filteredRecords; let i = index">
+
+        <td>{{i+1}}</td>
+        <td>{{record.studentId}}</td>
+        <td>{{record.name}}</td>
+        <td>{{record.course}}</td>
+        <td>{{record.year}}</td>
+        <td>{{record.fee}}</td>
+        <td>{{record.amount}}</td>
+        <td>{{record.description}}</td>
+        <td>{{record.method}}</td>
+        <td>{{record.balance}}</td>
+        <td>{{record.status}}</td>
+        <td>{{record.date}}</td>
+
+        <td>
+          <button class="edit">EDIT</button>
+          <button class="delete" (click)="deleteRecord(i)">DELETE</button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
