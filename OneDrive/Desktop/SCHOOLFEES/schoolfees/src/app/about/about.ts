@@ -7,5 +7,12 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './about.html',
   styleUrls: ['./about.css']
+  
 })
-export class About {}
+export class About {
+  
+  openFB(link: string) {
+    window.open(link, '_blank');
+  }
+
+}

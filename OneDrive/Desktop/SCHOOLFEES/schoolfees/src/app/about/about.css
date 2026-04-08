@@ -26,9 +26,10 @@
 
 .developers {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;  
   justify-content: center;
   gap: 30px;
+  margin-top: 30px;
 }
 
 .developer-card {
@@ -38,6 +39,7 @@
   width: 200px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.3s, box-shadow 0.3s;
+  flex-shrink: 0;  
 }
 
 .developer-card:hover {
@@ -57,4 +59,35 @@
   margin: 0;
   font-size: 18px;
   color: #d1006c;
+  cursor: pointer;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  padding: 20px 15px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.profile-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-card:hover img {
+  transform: scale(1.1);
 }

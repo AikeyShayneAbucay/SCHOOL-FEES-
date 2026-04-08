@@ -14,48 +14,89 @@
     <p class="error">{{ loginError }}</p>
   </div>
 
-  <!-- REGISTER -->
-  <div *ngIf="!showLoginSection">
-    <h3>Register Account</h3>
-    <form (submit)="register(); $event.preventDefault()">
+ <!-- REGISTER PAGE -->
+<div *ngIf="!showLoginSection" class="register-card">
+  <div class="card-header">
+    <h3>Registration</h3>
+  </div>
+
+  <form (submit)="register(); $event.preventDefault()">
+
+    <div class="input-group">
       <input type="text" [(ngModel)]="regFirstName" name="fname" placeholder="First Name" />
+    </div>
+
+    <div class="input-group">
       <input type="text" [(ngModel)]="regLastName" name="lname" placeholder="Last Name" />
+    </div>
+
+    <div class="input-group">
       <input type="email" [(ngModel)]="regEmail" name="email" placeholder="Email" />
+    </div>
+
+    <div class="input-group">
       <input type="text" [(ngModel)]="regContact" name="contact" placeholder="Contact Number" />
+    </div>
+
+    <div class="input-group">
       <input type="text" [(ngModel)]="regAddress" name="address" placeholder="Address" />
+    </div>
 
-      <label>Date of Birth:</label>
+    <label class="label">Date of Birth:</label>
+    <div class="input-group">
       <input type="date" [(ngModel)]="regBirthDate" name="birth" (change)="computeAge()" />
-      <input type="number" [(ngModel)]="regAge" name="age" placeholder="Age (Auto Computed)" readonly />
+    </div>
 
+    <div class="input-group">
+      <input type="number" [(ngModel)]="regAge" name="age" placeholder="Age (Auto Computed)" readonly />
+    </div>
+
+    <div class="input-group">
       <select [(ngModel)]="regGender" name="gender">
         <option value="">Select Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
       </select>
+    </div>
 
-      <hr />
+    <hr />
 
+    <div class="input-group icon-input">
       <input type="text" [(ngModel)]="regUsername" name="username" placeholder="Username" />
-      <input type="password" [(ngModel)]="regPassword" name="password" placeholder="Password" />
+      <span class="icon">👤</span>
+    </div>
 
+    <div class="input-group icon-input">
+      <input type="password" [(ngModel)]="regPassword" name="password" placeholder="Password" />
+      <span class="icon">🔒</span>
+    </div>
+
+    <div class="input-group">
       <select [(ngModel)]="regRole" name="role">
         <option value="admin">Admin</option>
         <option value="treasurer">Treasurer</option>
       </select>
-
-     <button type="button" (click)="register()">Register</button>
-    </form>
-
-    <p>Already have an account? <a href="#" (click)="showLogin()">Back to Login</a></p>
-
-    <!-- SUCCESS / ERROR MESSAGES -->
-    <div *ngIf="registerMessage" class="message">
-      <span>{{ registerMessage }}</span>
-      <!-- Show "Go to Login" button only for success message -->
-      <button *ngIf="registerMessage === 'Registration successful!'" (click)="showLogin()">
-        Go to Login
-      </button>
     </div>
+
+    <div class="terms">
+      <input type="checkbox" id="terms" />
+      <label for="terms">I agree to the terms & conditions</label>
+    </div>
+
+    <button class="register-btn" type="button" (click)="register()">Register</button>
+  </form>
+
+  <p class="login-link">
+    Already have an account?
+    <a href="#" (click)="showLogin()">Login</a>
+  </p>
+
+  <!-- MESSAGE -->
+  <div *ngIf="registerMessage" class="message">
+    <span>{{ registerMessage }}</span>
+    <button *ngIf="registerMessage === 'Registration successful!'" (click)="showLogin()">
+      Go to Login
+    </button>
   </div>
 </div>
+  

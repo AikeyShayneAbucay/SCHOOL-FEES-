@@ -1,3 +1,4 @@
+
 /* ================ LOGIN STYLES ================ */
 .container {
     width: 400px;
@@ -8,16 +9,6 @@
     animation: fadeIn 0.4s ease-in-out;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff9ecf, #ff66b2);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 h2 {
@@ -71,6 +62,7 @@ button:hover {
 .error {
     color: red;
     font-size: 13px;
+    margin-top: 2px;
 }
 
 a {
@@ -107,17 +99,133 @@ hr {
         width: 90%;
         padding: 20px;
     }
+
     input, select {
         font-size: 12px;
         padding: 9px;
     }
+
     button {
         font-size: 12px;
         padding: 7px 12px;
     }
 }
-.error {
-  color: red;
-  font-size: 13px;
-  margin-top: 2px;
+/* FORCE CENTER FIX */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* fallback if :host doesn't apply */
+app-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+/* ================= REGISTER ================= */
+
+
+.register-card {
+    background: #eef3f8;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+
+.register-card h3 {
+    text-align: center;
+    color: d63384;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+.register-card input,
+.register-card select {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border-bottom: 2px solid black !important;
+    box-shadow: none !important;
+    padding: 12px 35px 10px 5px;
+}
+
+
+.register-card input:focus,
+.register-card select:focus {
+    border-bottom: 2px solid #e7bce5 !important;
+}
+
+
+.register-card .input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+
+.register-card .icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+}
+
+
+.register-card .label {
+    font-size: 12px;
+    color: #555;
+}
+
+
+.register-card .terms {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.register-card .terms input {
+    width: auto;
+    margin-right: 6px;
+}
+
+/* DARK BUTTON like image */
+.register-card .register-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #1f2d3d !important;
+    font-size: 14px;
+}
+
+
+.register-card .register-btn:hover {
+    background:  #c2185b!important;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Login link */
+.register-card .login-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+/* Divider */
+.register-card hr {
+    background: #ddd;
+}
+
+/* Message */
+.register-card .message {
+    text-align: center;
 }
