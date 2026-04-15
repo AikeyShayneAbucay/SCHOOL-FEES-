@@ -1,3 +1,5 @@
+
+
 <div class="container">
 
   <h1 class="title">PAYMENT RECORDS</h1>
@@ -121,29 +123,45 @@
     <label>Name</label>
     <input [(ngModel)]="selectedRecord.name" placeholder="Name">
 
-    <label>Course</label>
-    <input [(ngModel)]="selectedRecord.course" placeholder="Course">
+   <label>Course</label>
+<select [(ngModel)]="newRecord.course">
+  <option value="" disabled>Select Course</option>
+  <option>BSIT</option>
+  <option>BSTCM</option>
+  <option>BSEMT</option>
+</select>
 
-    <label>Year</label>
-    <input [(ngModel)]="selectedRecord.year" placeholder="Year">
+<label>Year</label>
+<select [(ngModel)]="newRecord.year">
+  <option value="" disabled>Select Year</option>
+  <option>1ST</option>
+  <option>2ND</option>
+  <option>3RD</option>
+  <option>4TH</option>
+</select>
 
-    <label>Fee</label>
-    <input [(ngModel)]="selectedRecord.fee" placeholder="Fee">
+<label>Fee</label>
+<select [(ngModel)]="newRecord.fee">
+  <option value="" disabled>Select Fee</option>
+  <option>ORGANIZATION FEE</option>
+  <option>USG FEE</option>
+  <option>MISCELLANEOUS FEE</option>
+  <option>TUITION FEE</option>
+</select>
 
-    <label>Amount</label>
-    <input [(ngModel)]="selectedRecord.amount" placeholder="Amount">
+<label>Payment Method</label>
+<select [(ngModel)]="newRecord.method">
+  <option value="" disabled>Select Method</option>
+  <option>GCash</option>
+  <option>Cash</option>
+</select>
 
-    <label>Description</label>
-    <input [(ngModel)]="selectedRecord.description" placeholder="Description">
-
-    <label>Payment Method</label>
-    <input [(ngModel)]="selectedRecord.method" placeholder="Payment Method">
-
-    <label>Balance</label>
-    <input [(ngModel)]="selectedRecord.balance" placeholder="Balance">
-
-    <label>Status</label>
-    <input [(ngModel)]="selectedRecord.status" placeholder="Status">
+<label>Status</label>
+<select [(ngModel)]="newRecord.status">
+  <option value="" disabled>Select Status</option>
+  <option>Paid</option>
+  <option>Partial</option>
+</select>
 
     <label>Date</label>
     <input type="date" [(ngModel)]="selectedRecord.date">

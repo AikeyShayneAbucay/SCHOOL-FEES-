@@ -1,16 +1,26 @@
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#ffd6ec;
-padding:15px 40px;
-font-family:Cambria;
-font-weight:bold;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffd6ec;
+  padding: 0 40px;   
+  height: 70px;      
+  font-family: Cambria;
+  font-weight: bold;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  font-size: 20px;
+  color: #c2185b;
 }
 
-.logo{
-font-size:20px;
-color:#c2185b;
+.logo img {
+  width: auto;   
+  height: 80px;
+  object-fit: contain;
 }
 
 .nav-links a{
@@ -42,4 +52,11 @@ nav ul li a {
 nav ul li a:hover {
   background-color: #cf68ad;
   border-radius: 5px;
+}
+.role {
+  background: #c2185b;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 13px;
 }

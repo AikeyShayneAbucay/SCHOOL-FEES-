@@ -184,7 +184,7 @@ searchStudent() {
     const nameRegex = /^[A-Za-z\s]+$/;
     const numberRegex = /^[0-9]+$/;
     const methodRegex = /^(Cash|GCash)$/i;
-    const statusRegex = /^(Paid|Pending)$/i;
+    const statusRegex = /^(Paid|Partial)$/i;
 
     if (!record.studentId || !record.name || !record.course || !record.year || !record.amount || !record.method || !record.status) {
       return "⚠️ Please fill out all required fields!";
