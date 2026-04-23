@@ -28,41 +28,65 @@ export class Settings implements OnInit {
 
   showEdit = false;
 
-toggleEdit() {
-  this.showEdit = !this.showEdit;
-}
-
-saveProfile() {
-  alert('Profile updated!');
-  this.showEdit = false;
-}
-
-  constructor(private router: Router) {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-    }
-
-    const mode = localStorage.getItem('darkMode');
-    this.darkMode = mode === 'true';
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const savedImage = localStorage.getItem('profileImage');
-    if (savedImage) {
-      this.profilePreview = savedImage;
+    if (typeof localStorage !== 'undefined') {
+
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+      }
+
+      const mode = localStorage.getItem('darkMode');
+      this.darkMode = mode === 'true';
+
+      // ✅ ADDED: apply body class on load
+      this.applyTheme();
+
+      const savedImage = localStorage.getItem('profileImage');
+      if (savedImage) {
+        this.profilePreview = savedImage;
+      }
     }
   }
 
-  // Toggle mode
+  // Toggle edit
+  toggleEdit() {
+    this.showEdit = !this.showEdit;
+  }
+
+  saveProfile() {
+    alert('Profile updated!');
+    this.showEdit = false;
+  }
+
+  // Toggle dark mode
   switchMode() {
     this.darkMode = !this.darkMode;
-    localStorage.setItem('darkMode', this.darkMode.toString());
+
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('darkMode', this.darkMode.toString());
+    }
+
+    // ✅ ADDED: apply instantly
+    this.applyTheme();
+  }
+
+  // ✅ ADDED: global theme handler
+  applyTheme() {
+    if (this.darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
 
   // Logout
   logout() {
-    localStorage.removeItem('currentUser');
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('currentUser');
+    }
     this.router.navigate(['/login']);
   }
 
@@ -80,7 +104,7 @@ saveProfile() {
       return;
     }
 
-    if (this.currentPassword !== this.user.password) {
+    if (!this.user || this.currentPassword !== this.user.password) {
       this.passwordMessage = 'Current password is incorrect!';
       return;
     }
@@ -90,39 +114,45 @@ saveProfile() {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const index = users.findIndex((u: any) => u.username === this.user.username);
+    if (typeof localStorage !== 'undefined') {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const index = users.findIndex((u: any) => u.username === this.user.username);
 
-    if (index >= 0) {
-      users[index].password = this.newPassword;
-      localStorage.setItem('users', JSON.stringify(users));
+      if (index >= 0) {
+        users[index].password = this.newPassword;
+        localStorage.setItem('users', JSON.stringify(users));
 
-      this.user.password = this.newPassword;
-      localStorage.setItem('currentUser', JSON.stringify(this.user));
+        this.user.password = this.newPassword;
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
 
-      this.passwordMessage = 'Password changed successfully!';
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.confirmPassword = '';
+        this.passwordMessage = 'Password changed successfully!';
+        this.currentPassword = '';
+        this.newPassword = '';
+        this.confirmPassword = '';
+      }
     }
   }
 
-  // Edit profile button
+  // Profile image upload
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.profilePreview = reader.result;
+
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('profileImage', reader.result as string);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   addProfile() {
     alert('Edit profile clicked!');
   }
-
-  // Upload image
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.profilePreview = reader.result;
-      localStorage.setItem('profileImage', reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  }
-  
 }

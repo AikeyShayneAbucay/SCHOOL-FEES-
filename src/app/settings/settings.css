@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #6B2737;
+}
+
 .settings-container {
   max-width: 1100px;
   margin: 30px auto;
@@ -6,7 +12,7 @@
 
 .subtitle {
   margin-bottom: 20px;
-  color: gray;
+  color: #f1dada;
 }
 
 .settings-header {
@@ -16,7 +22,7 @@
 }
 
 .settings-header h2 {
-  color: #b30059;
+  color: #f7dada;
 }
 
 .actions button {
@@ -24,9 +30,15 @@
   padding: 8px 14px;
   border: none;
   border-radius: 8px;
-  background: #b30059;
+  background: #B57A85;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  background: #E6B7B5;
+  color: #6B2737;
 }
 
 .grid {
@@ -35,15 +47,51 @@
   gap: 20px;
 }
 
-/* CARDS */
 .card {
-  background: white;
+  background: #F1DFDC;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  color: #4a1f2d;
+  transition: 0.3s;
 }
 
-/* PROFILE */
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e6b7b5;
+  padding-bottom: 8px;
+}
+
+.card p {
+  display: grid;
+  grid-template-columns: 30px 160px 1fr;
+  align-items: center;
+  padding: 10px 0;
+  margin: 0;
+  border-bottom: 1px solid #e6b7b5;
+  font-size: 14px;
+  column-gap: 10px;
+}
+
+.card p:last-child {
+  border-bottom: none;
+}
+
+.card p strong {
+  color: #6B2737;
+  font-weight: 600;
+}
+
+.card p i {
+  margin-right: 10px;
+  color: #B57A85;
+}
+
 .profile-section {
   text-align: center;
   margin-bottom: 15px;
@@ -57,33 +105,29 @@
   margin-bottom: 10px;
 }
 
-/* RIGHT SIDE */
-.right-side .card {
-  margin-bottom: 20px;
-}
-
-/* INPUTS */
 input {
   width: 100%;
   margin: 8px 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #d8a8b0;
+  background: #fff;
+  margin-bottom: 10px;
 }
 
-/* BUTTON */
 button {
   margin-top: 10px;
   padding: 10px;
   border-radius: 8px;
   border: none;
-  background: #b30059;
+  background: #6B2737;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-  background: #ff3385;
+  background: #B57A85;
 }
 
 .message {
@@ -92,14 +136,46 @@ button:hover {
   color: green;
 }
 
-/* DARK MODE */
-:host.dark-mode .card {
+i {
+  margin-right: 8px;
+  color: #B57A85;
+}
+
+.grid > div .card {
+  margin-bottom: 20px;
+}
+
+.card button {
+  width: 100%;
+}
+
+:host.dark-mode {
   background: #2b1a2b;
+}
+
+:host.dark-mode .card {
+  background: #3a1f3a;
   color: white;
 }
 
 :host.dark-mode input {
-  background: #3a1f3a;
+  background: #4a2b4a;
   color: white;
-  border: 1px solid #555;
+  border: 1px solid #777;
+}
+
+:host.dark-mode .card p {
+  border-bottom: 1px solid #5a3a5a;
+}
+
+:host.dark-mode .card p strong {
+  color: #ffccd5; 
+}
+
+:host.dark-mode .card p span {
+  color: #ffffff; 
+}
+
+:host.dark-mode .card p i {
+  color: #ff8fa3; 
 }
