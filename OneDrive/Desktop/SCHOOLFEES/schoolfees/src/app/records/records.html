@@ -1,0 +1,175 @@
+
+
+<div class="container">
+
+  <h1 class="title">PAYMENT RECORDS</h1>
+
+  <div class="top-bar">
+    <button class="add-btn" (click)="openAddForm()">ADD STUDENT PAYMENT FORM</button>
+   
+    <div *ngIf="showAddForm" class="edit-modal">
+      <div class="edit-box">
+        <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>  
+
+        <h3>Add Student Payment</h3>
+
+        <label>Student ID</label>
+        <input [(ngModel)]="newRecord.studentId" placeholder="Student ID">
+
+        <label>Name</label>
+        <input [(ngModel)]="newRecord.name"
+               (input)="newRecord.name = newRecord.name.replace(/[^A-Za-z\s]/g, '')"
+               placeholder="Name"> 
+
+        <label>Course</label>
+        <input [(ngModel)]="newRecord.course"
+               (input)="newRecord.course = newRecord.course.replace(/[^A-Za-z\s]/g, '')"
+               placeholder="Course">
+
+        <label>Year</label>
+        <input [(ngModel)]="newRecord.year" placeholder="Year">
+
+        <label>Fee</label>
+        <input [(ngModel)]="newRecord.fee" placeholder="Fee">
+
+        <label>Amount</label>
+        <input [(ngModel)]="newRecord.amount" placeholder="Amount" type="number">
+
+        <label>Description</label>
+        <input [(ngModel)]="newRecord.description" placeholder="Description">
+
+        <label>Payment Method</label>
+        <input [(ngModel)]="newRecord.method" placeholder="Payment Method (Cash/GCash)">
+
+        <label>Balance</label>
+        <input [(ngModel)]="newRecord.balance" placeholder="Balance" type="number">
+
+        <label>Status</label>
+        <input [(ngModel)]="newRecord.status" placeholder="Status (Paid/Pending)">
+
+        <label>Date</label>
+        <input type="date" [(ngModel)]="newRecord.date">
+
+        <div class="modal-actions">
+          <button (click)="addRecord()">Add</button>
+          <button (click)="closeAddForm()">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="search-box">
+  <input type="text" placeholder="SEARCH STUDENT ID OR NAME" [(ngModel)]="searchId" (input)="searchStudent()">
+</div>
+<p *ngIf="filteredRecords.length === 0 && searchId">No matching records found.</p>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Course</th>
+          <th>Year</th>
+          <th>Fee</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Payment Method</th>
+          <th>Bal Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let record of filteredRecords; let i = index">
+
+          <td>{{i+1}}</td>
+          <td>{{record.studentId}}</td>
+          <td>{{record.name}}</td>
+          <td>{{record.course}}</td>
+          <td>{{record.year}}</td>
+          <td>{{record.fee}}</td>
+          <td>{{record.amount}}</td>
+          <td>{{record.description}}</td>
+          <td>{{record.method}}</td>
+          <td>{{record.balance}}</td>
+          <td>{{record.status}}</td>
+          <td>{{record.date}}</td>
+
+          <td>
+            <button class="edit" (click)="editRecord(record, i)">EDIT</button>
+            <button class="delete" (click)="deleteRecord(i)">DELETE</button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div *ngIf="selectedRecord" class="edit-modal">
+  <div class="edit-box">
+
+    <h3>Edit Record</h3>
+
+    <label>Name</label>
+    <input [(ngModel)]="selectedRecord.name" placeholder="Name">
+
+   <label>Course</label>
+<select [(ngModel)]="newRecord.course">
+  <option value="" disabled>Select Course</option>
+  <option>BSIT</option>
+  <option>BSTCM</option>
+  <option>BSEMT</option>
+</select>
+
+<label>Year</label>
+<select [(ngModel)]="newRecord.year">
+  <option value="" disabled>Select Year</option>
+  <option>1ST</option>
+  <option>2ND</option>
+  <option>3RD</option>
+  <option>4TH</option>
+</select>
+
+<label>Fee</label>
+<select [(ngModel)]="newRecord.fee">
+  <option value="" disabled>Select Fee</option>
+  <option>ORGANIZATION FEE</option>
+  <option>USG FEE</option>
+  <option>MISCELLANEOUS FEE</option>
+  <option>TUITION FEE</option>
+</select>
+
+<label>Payment Method</label>
+<select [(ngModel)]="newRecord.method">
+  <option value="" disabled>Select Method</option>
+  <option>GCash</option>
+  <option>Cash</option>
+</select>
+
+<label>Status</label>
+<select [(ngModel)]="newRecord.status">
+  <option value="" disabled>Select Status</option>
+  <option>Paid</option>
+  <option>Partial</option>
+</select>
+
+    <label>Date</label>
+    <input type="date" [(ngModel)]="selectedRecord.date">
+
+    <div class="modal-actions">
+      <button (click)="saveEdit()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="contact-container">
+
+  <h1>Contact Us</h1>
+
+  <p class="description">
+    Welcome! Here you can find the contact details of our system developers, as well as the current admin and treasurer managing the school fees system.
+  </p>
+
+  <!-- Current logged-in admin/treasurer -->
+  <div class="current-user-card" *ngIf="currentUser">
+    <h2>Current Account</h2>
+    <p><strong>Name:</strong> {{ currentUser.first_name }} {{ currentUser.last_name }}</p>
+    <p><strong>Role:</strong> {{ currentUser.role }}</p>
+    <p><strong>Email:</strong> {{ currentUser.email }}</p>
+    <p><strong>Contact:</strong> {{ currentUser.contact }}</p>
+  </div>
+
+  <!-- Developers -->
+  <div class="developers-section">
+    <h2>Developers</h2>
+    <div class="developer-cards">
+      <div class="developer-card" *ngFor="let dev of developers">
+        <img [src]="dev.img" [alt]="dev.name">
+        <h3>{{ dev.name }}</h3>
+        <p><strong>Role:</strong> {{ dev.role }}</p>
+        <p><strong>Email:</strong> {{ dev.email }}</p>
+        <p><strong>Phone:</strong> {{ dev.phone }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
