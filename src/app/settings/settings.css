@@ -1,0 +1,105 @@
+.settings-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-header h2 {
+  color: #b30059;
+}
+
+.actions button {
+  margin-left: 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #b30059;
+  color: white;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* PROFILE */
+.profile-section {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* RIGHT SIDE */
+.right-side .card {
+  margin-bottom: 20px;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTON */
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #b30059;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff3385;
+}
+
+.message {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
+}
+
+/* DARK MODE */
+:host.dark-mode .card {
+  background: #2b1a2b;
+  color: white;
+}
+
+:host.dark-mode input {
+  background: #3a1f3a;
+  color: white;
+  border: 1px solid #555;
+}

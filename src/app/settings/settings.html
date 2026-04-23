@@ -1,0 +1,78 @@
+<div class="settings-container">
+
+  <div class="settings-header">
+    <h2>Account Settings</h2>
+
+    <div class="actions">
+      <button (click)="switchAccount()">Switch Account</button>
+      <button (click)="switchMode()">
+        {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
+      <button (click)="logout()">Log Out</button>
+    </div>
+  </div>
+
+  <p class="subtitle">Manage your account information, password and preferences.</p>
+
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="card" *ngIf="user">
+      <h3>Account Information</h3>
+
+      <!-- PROFILE PIC DISPLAY ONLY -->
+      <div class="profile-section">
+        <img [src]="profilePreview || 'https://via.placeholder.com/100'" class="profile-pic">
+      </div>
+
+      <p><strong>First Name:</strong> {{ user.first_name }}</p>
+      <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Contact:</strong> {{ user.contact }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+      <p><strong>Birth Date:</strong> {{ user.dob }}</p>
+      <p><strong>Age:</strong> {{ user.age }}</p>
+      <p><strong>Gender:</strong> {{ user.gender }}</p>
+      <p><strong>Role:</strong> {{ user.role }}</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+
+      <!-- CHANGE PASSWORD -->
+      <div class="card">
+        <h3>Change Password</h3>
+
+        <input type="password" placeholder="Current Password" [(ngModel)]="currentPassword">
+        <input type="password" placeholder="New Password" [(ngModel)]="newPassword">
+        <input type="password" placeholder="Confirm New Password" [(ngModel)]="confirmPassword">
+
+        <button (click)="changePassword()">Change Password</button>
+        <p class="message">{{ passwordMessage }}</p>
+      </div>
+
+      <!-- PROFILE EDIT -->
+      <div class="card">
+        <h3>Profile</h3>
+
+        <button (click)="toggleEdit()">Edit Profile</button>
+
+        <!-- EDIT FORM -->
+        <div *ngIf="showEdit" class="edit-section">
+
+          <div class="profile-section">
+            <img [src]="profilePreview || 'https://via.placeholder.com/100'" class="profile-pic">
+            <input type="file" (change)="onFileSelected($event)">
+          </div>
+
+          <button (click)="saveProfile()">Save</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
