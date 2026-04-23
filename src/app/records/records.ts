@@ -11,189 +11,96 @@ import { FormsModule } from '@angular/forms';
 })
 export class Records implements OnInit {
 
-  searchId = '';
-  records: any[] = [];
+  searchId: string = '';
+
+  records = [
+    {
+      studentId: '2024-001',
+      name: 'Juan Dela Cruz',
+      course: 'BSIT',
+      year: '2',
+      fee: 'Tuition',
+      amount: 3000,
+      description: 'Partial Payment',
+      method: 'Cash',
+      balance: 2000,
+      status: 'Pending',
+      date: 'March 10, 2026'
+    },
+    {
+      studentId: '2024-002',
+      name: 'Maria Santos',
+      course: 'BSBA',
+      year: '1',
+      fee: 'Misc Fee',
+      amount: 5000,
+      description: 'Full Payment',
+      method: 'GCash',
+      balance: 0,
+      status: 'Paid',
+      date: 'March 9, 2026'
+    }
+  ];
+
   filteredRecords: any[] = [];
-
-  showAddForm = false;
-  showTransactionForm = false;
-
   selectedRecord: any = null;
-  selectedIndex = -1;
+  selectedIndex: number = -1;
 
-  feeMap: any = {
-    "Organization fee": 100,
-    "Usg Fee": 500,
-    "Miscellaneous fee": 1000,
-    "Tuition fee": 5000
-  };
+  errorMessage: string = '';
 
-  newRecord: any = this.getEmptyRecord();
-  newTransaction: any = this.getEmptyTransaction();
-
+  // LOAD DATA
   ngOnInit() {
     const data = localStorage.getItem('records');
-    this.records = data ? JSON.parse(data) : [];
-    this.filteredRecords = [];
+
+    if (data) {
+      this.records = JSON.parse(data);
+    } else {
+      this.saveToStorage();
+    }
+
+    this.filteredRecords = [...this.records];
   }
 
-  getEmptyRecord() {
-    return {
-      studentId: '',
-      name: '',
-      course: '',
-      year: '',
-      fee: '',
-      amount: 0,
-      method: '',
-      balance: 0,
-      status: '',
-      date: '',
-      receipt: ''
-    };
-  }
-
-  getEmptyTransaction() {
-    return {
-      fee: '',
-      amount: 0,
-      method: '',
-      balance: 0,
-      status: '',
-      date: '',
-      receipt: ''
-    };
-  }
-
+  // SAVE
   saveToStorage() {
     localStorage.setItem('records', JSON.stringify(this.records));
   }
 
-  // FORMS
-  openAddForm() {
-    this.showAddForm = true;
-    this.showTransactionForm = false;
-  }
-
-  closeAddForm() {
-    this.showAddForm = false;
-    this.newRecord = this.getEmptyRecord();
-  }
-
-  openTransactionForm() {
-    if (!this.filteredRecords.length) {
-      alert("Search/select a student first.");
-      return;
-    }
-
-    this.showTransactionForm = true;
-    this.showAddForm = false;
-    this.newTransaction = this.getEmptyTransaction();
-  }
-
-  closeTransactionForm() {
-    this.showTransactionForm = false;
-    this.newTransaction = this.getEmptyTransaction();
-  }
-
-  // LOGIC
-  computeBalance(record: any) {
-    const fee = this.feeMap[record.fee] || 0;
-
-    let paid = Number(record.amount || 0);
-    if (paid < 0) paid = 0;
-    if (paid > fee) paid = fee;
-
-    record.amount = paid;
-    record.balance = fee - paid;
-    record.status = record.balance === 0 ? 'Paid' : 'Partial';
-  }
-
-  onFileSelected(event: any, target: any) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => target.receipt = reader.result as string;
-    reader.readAsDataURL(file);
-  }
-
-  findStudent(studentId: string, name: string) {
-    return this.records.find(r =>
-      r.studentId === studentId ||
-      r.name.toLowerCase() === name.toLowerCase()
-    );
-  }
-
-  // ADD STUDENT
-  addRecord() {
-    const existing = this.findStudent(
-      this.newRecord.studentId,
-      this.newRecord.name
-    );
-
-    if (existing) {
-      alert("Student already exists!");
-      return;
-    }
-
-    this.computeBalance(this.newRecord);
-
-    this.records = [...this.records, { ...this.newRecord }];
-    this.saveToStorage();
-
-    this.closeAddForm();
-    this.searchId = '';
-    this.filteredRecords = [];
-  }
-
-  // ADD TRANSACTION
-  addTransaction() {
-
-    const student = this.filteredRecords[0];
-
-    const newEntry = {
-      studentId: student.studentId,
-      name: student.name,
-      course: student.course,
-      year: student.year,
-      ...this.newTransaction
-    };
-
-    this.computeBalance(newEntry);
-
-    this.records = [...this.records, newEntry];
-    this.saveToStorage();
-
-    this.closeTransactionForm();
-    this.searchId = '';
-    this.filteredRecords = [];
-  }
-
   // SEARCH
-  searchStudent() {
-    const key = this.searchId.trim().toLowerCase();
-
-    if (!key) {
-      this.filteredRecords = [];
-      return;
-    }
-
-    this.filteredRecords = this.records.filter(r =>
-      r.studentId.includes(key) ||
-      r.name.toLowerCase().includes(key)
-    );
+  
+searchStudent() {
+  if (!this.searchId) {
+    this.filteredRecords = this.records;
+    return;
   }
 
-  // EDIT / DELETE
+  const searchLower = this.searchId.toLowerCase();
+
+  this.filteredRecords = this.records.filter(record =>
+    record.studentId.toLowerCase().includes(searchLower) ||
+    record.name.toLowerCase().includes(searchLower)
+  );
+}
+
+  // EDIT
   editRecord(record: any, index: number) {
     this.selectedRecord = { ...record };
     this.selectedIndex = index;
   }
 
   saveEdit() {
-    this.computeBalance(this.selectedRecord);
-    this.records[this.selectedIndex] = this.selectedRecord;
+
+    const error = this.validateRecord(this.selectedRecord);
+    if (error) {
+      this.errorMessage = error;
+      return;
+    }
+
+    this.errorMessage = '';
+
+    this.filteredRecords[this.selectedIndex] = this.selectedRecord;
+    this.records = [...this.filteredRecords];
+
     this.saveToStorage();
     this.selectedRecord = null;
   }
@@ -202,12 +109,123 @@ export class Records implements OnInit {
     this.selectedRecord = null;
   }
 
-  confirmDelete(index: number) {
-    if (confirm("Are you sure you want to delete this record?")) {
-      this.records.splice(index, 1);
+  // DELETE
+  deleteRecord(index: number) {
+    const confirmDelete = confirm("Are you sure you want to delete?");
+    
+    if (confirmDelete) {
+      this.filteredRecords.splice(index, 1);
+      this.records = [...this.filteredRecords];
       this.saveToStorage();
-      this.filteredRecords = [];
-      this.searchId = '';
     }
+  }
+
+  // ADD FORM
+  showAddForm: boolean = false;
+
+  newRecord: any = {
+    studentId: '',
+    name: '',
+    course: '',
+    year: '',
+    fee: '',
+    amount: 0,
+    description: '',
+    method: '',
+    balance: 0,
+    status: '',
+    date: ''
+  };
+
+  openAddForm() {
+    this.showAddForm = true;
+  }
+
+  closeAddForm() {
+    this.showAddForm = false;
+  }
+
+  // ADD RECORD
+  addRecord() {
+
+    const error = this.validateRecord(this.newRecord);
+    if (error) {
+      this.errorMessage = error;
+      return;
+    }
+
+    this.errorMessage = '';
+
+    this.records.push({ ...this.newRecord });
+    this.filteredRecords = [...this.records];
+
+    this.saveToStorage();
+
+    this.newRecord = {
+      studentId: '',
+      name: '',
+      course: '',
+      year: '',
+      fee: '',
+      amount: 0,
+      description: '',
+      method: '',
+      balance: 0,
+      status: '',
+      date: ''
+    };
+
+    this.showAddForm = false;
+  }
+
+  // VALIDATION
+  validateRecord(record: any): string {
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const numberRegex = /^[0-9]+$/;
+    const methodRegex = /^(Cash|GCash)$/i;
+    const statusRegex = /^(Paid|Partial)$/i;
+
+    if (!record.studentId || !record.name || !record.course || !record.year || !record.amount || !record.method || !record.status) {
+      return "⚠️ Please fill out all required fields!";
+    }
+
+    if (!numberRegex.test(record.studentId)) {
+      return "Student ID must be numbers only!";
+    }
+
+    if (!nameRegex.test(record.name)) {
+      return "Name must be letters only!";
+    }
+
+    if (!nameRegex.test(record.course)) {
+      return "Course must be letters only!";
+    }
+
+    if (!numberRegex.test(record.year)) {
+      return "Year must be a number!";
+    }
+
+    if (!nameRegex.test(record.fee)) {
+      return "Fee must be a word!";
+    }
+
+    if (record.description && !nameRegex.test(record.description)) {
+      return "Description must be letters only!";
+    }
+
+    if (!methodRegex.test(record.method)) {
+      return "Payment must be Cash or GCash only!";
+    }
+
+    if (isNaN(record.balance)) {
+      return "Balance must be a number!";
+    }
+
+    if (!statusRegex.test(record.status)) {
+      return "Status must be Paid or Pending only!";
+    }
+
+    return '';
   }
 }

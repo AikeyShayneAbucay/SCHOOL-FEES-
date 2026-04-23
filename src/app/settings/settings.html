@@ -1,83 +1,47 @@
 <div class="settings-container">
 
+  <!-- Top bar -->
   <div class="settings-header">
     <h2>Account Settings</h2>
-
     <div class="actions">
-     <button (click)="switchAccount()">
-  <i class="fa-solid fa-users"></i> Switch Account
-</button>
-
-<button (click)="switchMode()">
-  <i class="fa-solid fa-moon"></i>
-  {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
-</button>
-
-<button (click)="logout()">
-  <i class="fa-solid fa-right-from-bracket"></i> Log Out
-</button>
+      <button title="Logout" (click)="logout()">
+        <img src="logout.png" alt="Logout" width="20" height="20">
+      </button>
+      <button (click)="switchAccount()">Switch Account</button>
+      <button (click)="switchMode()">
+        {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
     </div>
   </div>
 
-  <p class="subtitle">Manage your account information, password and preferences.</p>
+  <!-- Account information card -->
+  <div class="account-info" *ngIf="user">
+    <h3>Account Information</h3>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Contact:</strong> {{ user.contact }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <p><strong>Birth Date:</strong> {{ user.dob }}</p>
+    <p><strong>Age:</strong> {{ user.age }}</p>
+    <p><strong>Gender:</strong> {{ user.gender }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+  </div>
 
-  <div class="grid">
+  <!-- Change password card -->
+  <div class="change-password">
+    <h3>Change Password</h3>
+    <input type="password" placeholder="Current Password" [(ngModel)]="currentPassword">
+    <input type="password" placeholder="New Password" [(ngModel)]="newPassword">
+    <input type="password" placeholder="Confirm New Password" [(ngModel)]="confirmPassword">
+    <button (click)="changePassword()">Change Password</button>
+    <p class="message">{{ passwordMessage }}</p>
+  </div>
 
-    <!-- LEFT -->
-    <div class="card" *ngIf="user">
-      <h3>Account Information</h3>
-
-    <p><i class="fa-solid fa-user"></i> <strong>First Name:</strong> {{ user.first_name }}</p>
-    <p><i class="fa-solid fa-user"></i> <strong>Last Name:</strong> {{ user.last_name }}</p>
-    <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
-    <p><i class="fa-solid fa-at"></i> <strong>Username:</strong> {{ user.username }}</p>
-    <p><i class="fa-solid fa-phone"></i> <strong>Contact:</strong> {{ user.contact }}</p>
-    <p><i class="fa-solid fa-location-dot"></i> <strong>Address:</strong> {{ user.address }}</p>
-    <p><i class="fa-solid fa-calendar"></i> <strong>Birth Date:</strong> {{ user.dob }}</p>
-    <p><i class="fa-solid fa-hourglass-half"></i> <strong>Age:</strong> {{ user.age }}</p>
-    <p><i class="fa-solid fa-venus-mars"></i> <strong>Gender:</strong> {{ user.gender }}</p>
-    <p><i class="fa-solid fa-user-shield"></i> <strong>Role:</strong> {{ user.role }}</p>
-    </div>
-
-    <!-- RIGHT -->
-    <div>
-
-      <!-- CHANGE PASSWORD -->
-      <div class="card">
-      <h3><i class="fa-solid fa-lock"></i> Change Password</h3>
-
-        <input type="password" placeholder="Current Password" [(ngModel)]="currentPassword">
-        <input type="password" placeholder="New Password" [(ngModel)]="newPassword">
-        <input type="password" placeholder="Confirm New Password" [(ngModel)]="confirmPassword">
-
-        <button (click)="changePassword()">Change Password</button>
-        <p class="message">{{ passwordMessage }}</p>
-      </div>
-
-      <!-- PROFILE EDIT -->
-      <div class="card">
-      <h3><i class="fa-solid fa-user-gear"></i> Profile</h3>
-
-    <button (click)="toggleEdit()">
-    <i class="fa-solid fa-pen"></i> Edit Profile
-    </button>
-      
-
-        <!-- EDIT FORM -->
-        <div *ngIf="showEdit" class="edit-section">
-
-          <div class="profile-section">
-            <img [src]="profilePreview || 'https://via.placeholder.com/100'" class="profile-pic">
-            <input type="file" (change)="onFileSelected($event)">
-          </div>
-
-          <button (click)="saveProfile()">Save</button>
-        </div>
-
-      </div>
-
-    </div>
-
+  <!-- Add profile card -->
+  <div class="add-profile">
+    <button (click)="addProfile()">Add Profile</button>
   </div>
 
 </div>

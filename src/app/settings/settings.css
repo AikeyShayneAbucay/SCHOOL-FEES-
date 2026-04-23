@@ -1,181 +1,108 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background: #6B2737;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .settings-container {
-  max-width: 1100px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffe0f0; /* soft pink background */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s, color 0.3s;
 }
 
-.subtitle {
-  margin-bottom: 20px;
-  color: #f1dada;
+:host.dark-mode .settings-container {
+  background: #2b1a2b; /* dark pink/purple tone */
+  color: #f8f8f8;
 }
 
 .settings-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #ffc0d9;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .settings-header h2 {
-  color: #f7dada;
+  font-size: 28px;
+  color: #d1006c; /* dark pink title */
 }
 
-.actions button {
+.settings-header .actions button {
   margin-left: 10px;
-  padding: 8px 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
-  background: #B57A85;
-  color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  background-color: #d1006c;
+  color: white;
+  transition: background 0.2s;
 }
 
-.actions button:hover {
-  background: #E6B7B5;
-  color: #6B2737;
+.settings-header .actions button:hover {
+  background-color: #ff3399;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.card {
-  background: #F1DFDC;
-  padding: 20px;
+.account-info, .change-password, .add-profile {
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  color: #4a1f2d;
-  transition: 0.3s;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+:host.dark-mode .account-info,
+:host.dark-mode .change-password,
+:host.dark-mode .add-profile {
+  background: #3a1f3a;
+  color: #f0f0f0;
 }
 
-.card h3 {
-  margin-bottom: 15px;
-  border-bottom: 2px solid #e6b7b5;
-  padding-bottom: 8px;
+.account-info h3,
+.change-password h3 {
+  margin-top: 0;
+  color: #d1006c;
 }
 
-.card p {
-  display: grid;
-  grid-template-columns: 30px 160px 1fr;
-  align-items: center;
-  padding: 10px 0;
-  margin: 0;
-  border-bottom: 1px solid #e6b7b5;
-  font-size: 14px;
-  column-gap: 10px;
+.account-info p {
+  margin: 8px 0;
 }
 
-.card p:last-child {
-  border-bottom: none;
-}
-
-.card p strong {
-  color: #6B2737;
-  font-weight: 600;
-}
-
-.card p i {
-  margin-right: 10px;
-  color: #B57A85;
-}
-
-.profile-section {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.profile-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-input {
+.change-password input {
+  display: block;
   width: 100%;
   margin: 8px 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #d8a8b0;
-  background: #fff;
-  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px;
+.change-password button,
+.add-profile button {
+  margin-top: 15px;
+  padding: 10px 15px;
   border-radius: 8px;
   border: none;
-  background: #6B2737;
+  background-color: #d1006c;
   color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.2s;
 }
 
-button:hover {
-  background: #B57A85;
+.change-password button:hover,
+.add-profile button:hover {
+  background-color: #ff3399;
 }
 
-.message {
-  margin-top: 10px;
+.change-password .message {
+  margin-top: 8px;
   font-weight: bold;
   color: green;
-}
-
-i {
-  margin-right: 8px;
-  color: #B57A85;
-}
-
-.grid > div .card {
-  margin-bottom: 20px;
-}
-
-.card button {
-  width: 100%;
-}
-
-:host.dark-mode {
-  background: #2b1a2b;
-}
-
-:host.dark-mode .card {
-  background: #3a1f3a;
-  color: white;
-}
-
-:host.dark-mode input {
-  background: #4a2b4a;
-  color: white;
-  border: 1px solid #777;
-}
-
-:host.dark-mode .card p {
-  border-bottom: 1px solid #5a3a5a;
-}
-
-:host.dark-mode .card p strong {
-  color: #ffccd5; 
-}
-
-:host.dark-mode .card p span {
-  color: #ffffff; 
-}
-
-:host.dark-mode .card p i {
-  color: #ff8fa3; 
 }

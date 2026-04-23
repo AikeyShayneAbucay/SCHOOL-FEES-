@@ -12,9 +12,5 @@ export class Navbar {
   logout() {
     localStorage.removeItem('currentUser'); // Remove logged-in user
     window.location.href = '/login';       // Redirect to login page
-    
   }
-  toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-}
 }
